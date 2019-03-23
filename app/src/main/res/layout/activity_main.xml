@@ -50,7 +50,7 @@
 
     <ImageView
         android:id="@+id/dancing_monkey"
-        android:background="@drawable/monkey_animation"
+        android:src="@drawable/monkey"
         android:layout_width="wrap_content"
         android:layout_height="400dp"
         android:layout_marginTop="10dp"

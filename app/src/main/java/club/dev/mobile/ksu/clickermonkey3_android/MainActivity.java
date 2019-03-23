@@ -1,12 +1,13 @@
 package club.dev.mobile.ksu.clickermonkey3_android;
 
 import android.content.DialogInterface;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.CountDownTimer;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView countdownTimerTV;
     private TextView clickGoalTV;
     private TextView levelTV;
-    private AnimationDrawable dancingMonkeyAnimation;
+    private Animation dancingMonkeyAnimation;
     private int level = 1;
     private int monkeyClicks;
     private static final int TIMER_LENGTH = 11;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         countdownTimerTV = findViewById(R.id.countdown_timer);
         clickGoalTV = findViewById(R.id.click_goal);
         dancingMonkey = findViewById(R.id.dancing_monkey);
-
+        dancingMonkeyAnimation = AnimationUtils.loadAnimation(this, R.anim.dancing_monkey);
         startRound();
     }
 
@@ -55,8 +56,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startAnimation() {
-        dancingMonkeyAnimation = (AnimationDrawable) dancingMonkey.getBackground();
-        dancingMonkeyAnimation.start();
+        dancingMonkey.startAnimation(dancingMonkeyAnimation);
     }
 
     private void startTimer() {
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void onTimeOut() {
-        dancingMonkeyAnimation.stop();
+        dancingMonkeyAnimation.cancel();
         dancingMonkey.setOnClickListener(null);
         if (monkeyClicks < (10*level)) {
             onLose();
