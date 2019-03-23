@@ -143,6 +143,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkHighScore() {
-
+        //TODO: check to see if they get to go on the scoreboard
     }
 }
