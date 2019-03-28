@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">ClickerMonkey3_Android</string>
+    <string name="app_name">Clicker Monkey 3</string>
+    <string name="title_activity_start">Home</string>
+    <string name="play_game">Play Game</string>
+    <string name="view_scoreboard">View Scoreboard</string>
+    <string name="view_attributions">Attributions</string>
 </resources>
