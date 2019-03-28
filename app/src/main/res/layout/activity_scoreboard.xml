@@ -4,6 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FF9900"
     tools:context=".ScoreboardActivity">
 
+    <ListView
+        android:layout_width="395dp"
+        android:layout_height="605dp"
+        android:background="#FF704d"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="118dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="320dp"
+        android:layout_height="55dp"
+        android:text="Scoreboard"
+        android:textAlignment="center"
+        android:textSize="35dp"
+        android:background="#FFFF66"
+        tools:layout_editor_absoluteX="45dp"
+        tools:layout_editor_absoluteY="30dp" />
 </android.support.constraint.ConstraintLayout>
