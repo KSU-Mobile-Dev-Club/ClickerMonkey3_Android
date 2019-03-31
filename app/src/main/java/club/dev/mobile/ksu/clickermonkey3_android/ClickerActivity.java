@@ -1,13 +1,9 @@
 package club.dev.mobile.ksu.clickermonkey3_android;
 
 import android.content.DialogInterface;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.CountDownTimer;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,7 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class ClickerActivity extends AppCompatActivity {
     private ImageView dancingMonkey;
     private TextView clickCounterTV;
     private TextView countdownTimerTV;
@@ -31,13 +27,12 @@ public class MainActivity extends AppCompatActivity {
     private int monkeyClicks;
     private static final int TIMER_LENGTH = 11;
     private List<Drawable> monkeyImages = new ArrayList<>();
+    private CountDownTimer mTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        getSupportActionBar().setTitle("CLICKER MONKEY 3");
+        setContentView(R.layout.activity_clicker);
 
         levelTV = findViewById(R.id.level);
         clickCounterTV = findViewById(R.id.click_counter);
@@ -46,6 +41,14 @@ public class MainActivity extends AppCompatActivity {
         dancingMonkey = findViewById(R.id.dancing_monkey);
         dancingMonkeyAnimation = AnimationUtils.loadAnimation(this, R.anim.dancing_monkey);
         startRound();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mTimer != null) {
+            mTimer.cancel();
+        }
     }
 
     private void setMonkeyImage() {
@@ -81,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startTimer() {
-        new CountDownTimer(1000 * TIMER_LENGTH, 1000) {
+        mTimer = new CountDownTimer(1000 * TIMER_LENGTH, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 countdownTimerTV.setText("Seconds remaining: " + millisUntilFinished / 1000);
