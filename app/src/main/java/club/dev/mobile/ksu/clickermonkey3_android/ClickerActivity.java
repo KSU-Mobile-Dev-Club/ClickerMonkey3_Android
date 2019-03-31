@@ -28,6 +28,7 @@ public class ClickerActivity extends AppCompatActivity {
     private static final int TIMER_LENGTH = 11;
     private List<Drawable> monkeyImages = new ArrayList<>();
     private CountDownTimer mTimer;
+    private TimerView mTimerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,9 @@ public class ClickerActivity extends AppCompatActivity {
         dancingMonkey = findViewById(R.id.dancing_monkey);
         dancingMonkeyAnimation = AnimationUtils.loadAnimation(this, R.anim.dancing_monkey);
         startRound();
+
+        mTimerView = (TimerView) findViewById(R.id.timer);
+        mTimerView.start(TIMER_LENGTH);
     }
 
     @Override
