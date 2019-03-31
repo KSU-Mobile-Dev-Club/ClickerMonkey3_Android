@@ -25,7 +25,6 @@ public class ClickerActivity extends AppCompatActivity {
     private int level = 1;
     private int monkeyClicks;
     private static final int TIMER_LENGTH = 11;
-    private List<Drawable> monkeyImages = new ArrayList<>();
     private CountDownTimer mTimer;
     private TimerView mTimerView;
 
@@ -51,22 +50,11 @@ public class ClickerActivity extends AppCompatActivity {
         }
     }
 
-    private void setMonkeyImage() {
-        if (monkeyImages.isEmpty()) {
-            monkeyImages.add(getResources().getDrawable(R.drawable.monkey));
-        }
-
-        Drawable[] layers = monkeyImages.toArray(new Drawable[monkeyImages.size()]);
-        LayerDrawable layerDrawable = new LayerDrawable(layers);
-        dancingMonkey.setImageDrawable(layerDrawable);
-    }
-
     private void startRound() {
-        setMonkeyImage();
-        clickGoalTV.setText("Click goal = " + level * 10);
-        levelTV.setText("Level = " + level);
+        clickGoalTV.setText("Click Goal: " + level * 10);
+        levelTV.setText("Level " + level);
         monkeyClicks = 0;
-        clickCounterTV.setText("Monkey clicks = " + monkeyClicks);
+        clickCounterTV.setText("Monkey Clicks: " + monkeyClicks);
 
         dancingMonkey.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +86,7 @@ public class ClickerActivity extends AppCompatActivity {
 
     private void onMonkeyClicked() {
         monkeyClicks++;
-        clickCounterTV.setText("Monkey Clicks = " + monkeyClicks);
+        clickCounterTV.setText("Monkey Clicks: " + monkeyClicks);
     }
 
     private void onTimeOut() {
@@ -130,18 +118,16 @@ public class ClickerActivity extends AppCompatActivity {
 
     private void restart() {
         level = 1;
-        monkeyImages.clear();
+        dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey));
         startRound();
     }
 
     private void onWin() {
         level++;
-        getMonkeyAccessory();
+        if (level == 2) {
+            dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey));
+        }
         startRound();
-    }
-
-    private void getMonkeyAccessory() {
-        monkeyImages.add(getResources().getDrawable(R.drawable.hat));
     }
 
     private void checkHighScore() {
