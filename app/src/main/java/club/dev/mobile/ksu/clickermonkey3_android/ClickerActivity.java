@@ -19,7 +19,6 @@ import java.util.List;
 public class ClickerActivity extends AppCompatActivity {
     private ImageView dancingMonkey;
     private TextView clickCounterTV;
-    private TextView countdownTimerTV;
     private TextView clickGoalTV;
     private TextView levelTV;
     private Animation dancingMonkeyAnimation;
@@ -37,14 +36,11 @@ public class ClickerActivity extends AppCompatActivity {
 
         levelTV = findViewById(R.id.level);
         clickCounterTV = findViewById(R.id.click_counter);
-        countdownTimerTV = findViewById(R.id.countdown_timer);
         clickGoalTV = findViewById(R.id.click_goal);
         dancingMonkey = findViewById(R.id.dancing_monkey);
         dancingMonkeyAnimation = AnimationUtils.loadAnimation(this, R.anim.dancing_monkey);
+        mTimerView = findViewById(R.id.timer);
         startRound();
-
-        mTimerView = (TimerView) findViewById(R.id.timer);
-        mTimerView.start(TIMER_LENGTH);
     }
 
     @Override
@@ -81,6 +77,7 @@ public class ClickerActivity extends AppCompatActivity {
 
         startAnimation();
         startTimer();
+        mTimerView.start(TIMER_LENGTH);
     }
 
     private void startAnimation() {
@@ -91,11 +88,9 @@ public class ClickerActivity extends AppCompatActivity {
         mTimer = new CountDownTimer(1000 * TIMER_LENGTH, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                countdownTimerTV.setText("Seconds remaining: " + millisUntilFinished / 1000);
             }
 
             public void onFinish() {
-                countdownTimerTV.setText("done!");
                 onTimeOut();
             }
         }.start();
@@ -108,6 +103,7 @@ public class ClickerActivity extends AppCompatActivity {
 
     private void onTimeOut() {
         dancingMonkeyAnimation.cancel();
+        mTimerView.stop();
         dancingMonkey.setOnClickListener(null);
         if (monkeyClicks < (10*level)) {
             onLose();
@@ -118,7 +114,6 @@ public class ClickerActivity extends AppCompatActivity {
     }
 
     private void onLose() {
-        countdownTimerTV.setText("OUT OF TIME!");
         checkHighScore();
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("You lose!")
