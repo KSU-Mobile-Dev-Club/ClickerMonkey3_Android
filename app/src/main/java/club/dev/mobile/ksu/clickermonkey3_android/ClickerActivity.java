@@ -37,8 +37,10 @@ public class ClickerActivity extends AppCompatActivity {
         clickCounterTV = findViewById(R.id.click_counter);
         clickGoalTV = findViewById(R.id.click_goal);
         dancingMonkey = findViewById(R.id.dancing_monkey);
+        dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey));
         dancingMonkeyAnimation = AnimationUtils.loadAnimation(this, R.anim.dancing_monkey);
         mTimerView = findViewById(R.id.timer);
+
         startRound();
     }
 
@@ -125,7 +127,10 @@ public class ClickerActivity extends AppCompatActivity {
     private void onWin() {
         level++;
         if (level == 2) {
-            dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey));
+            dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey2));
+        }
+        else if (level == 3) {
+            dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey3));
         }
         startRound();
     }
