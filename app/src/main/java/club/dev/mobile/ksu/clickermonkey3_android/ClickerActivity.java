@@ -3,6 +3,7 @@ package club.dev.mobile.ksu.clickermonkey3_android;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +28,8 @@ public class ClickerActivity extends AppCompatActivity {
     private static final int TIMER_LENGTH = 11;
     private CountDownTimer mTimer;
     private TimerView mTimerView;
+    private MediaPlayer beatRoundEffect;
+    private MediaPlayer lostEffect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,8 @@ public class ClickerActivity extends AppCompatActivity {
         dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey));
         dancingMonkeyAnimation = AnimationUtils.loadAnimation(this, R.anim.dancing_monkey);
         mTimerView = findViewById(R.id.timer);
+        beatRoundEffect = MediaPlayer.create(this, R.raw.sample2);
+        lostEffect = MediaPlayer.create(this, R.raw.sample3);
 
         startRound();
     }
@@ -104,8 +109,9 @@ public class ClickerActivity extends AppCompatActivity {
     }
 
     private void onLose() {
+        lostEffect.start();
         checkHighScore();
-        AlertDialog dialog = new AlertDialog.Builder(this)
+        new AlertDialog.Builder(this)
                 .setTitle("You lose!")
                 .setMessage("Too bad...Do you want to play again?")
                 .setPositiveButton("Heck yes", new DialogInterface.OnClickListener() {
@@ -114,7 +120,12 @@ public class ClickerActivity extends AppCompatActivity {
                         restart();
                     }
                 })
-                .setNegativeButton("No", null)
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        onBackPressed();
+                    }
+                })
                 .show();
     }
 
@@ -125,6 +136,7 @@ public class ClickerActivity extends AppCompatActivity {
     }
 
     private void onWin() {
+        beatRoundEffect.start();
         level++;
         if (level == 2) {
             dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey2));
