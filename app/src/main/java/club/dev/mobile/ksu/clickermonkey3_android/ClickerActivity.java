@@ -144,6 +144,9 @@ public class ClickerActivity extends AppCompatActivity {
         else if (level == 3) {
             dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey3));
         }
+        else if (level == 4) {
+            dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey4));
+        }
         startRound();
     }
 
