@@ -22,6 +22,7 @@
         <activity android:name=".ClickerActivity" />
         <activity android:name=".ChooseAccessoryActivity" />
         <activity android:name=".ScoreboardActivity" />
+        <activity android:name=".SplashScreenActivity"></activity>
     </application>
 
 </manifest>

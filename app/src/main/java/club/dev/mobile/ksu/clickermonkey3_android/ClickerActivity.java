@@ -1,10 +1,10 @@
 package club.dev.mobile.ksu.clickermonkey3_android;
 
 import android.content.DialogInterface;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,10 +14,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ClickerActivity extends AppCompatActivity {
+    private static final int SPLASH_SCREEN_REQUEST = 1000;
     private ImageView dancingMonkey;
     private TextView clickCounterTV;
     private TextView clickGoalTV;
@@ -47,6 +45,13 @@ public class ClickerActivity extends AppCompatActivity {
         lostEffect = MediaPlayer.create(this, R.raw.sample3);
 
         startRound();
+
+        dancingMonkey.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onMonkeyClicked();
+            }
+        });
     }
 
     @Override
@@ -58,25 +63,27 @@ public class ClickerActivity extends AppCompatActivity {
     }
 
     private void startRound() {
+        setMonkeyImage();
         clickGoalTV.setText("Click Goal: " + level * 10);
         levelTV.setText("Level " + level);
         monkeyClicks = 0;
         clickCounterTV.setText("Monkey Clicks: " + monkeyClicks);
-
-        dancingMonkey.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onMonkeyClicked();
-            }
-        });
-
-        startAnimation();
+        clickCounterTV.setTextColor(getResources().getColor(R.color.colorAccent));
+        dancingMonkey.startAnimation(dancingMonkeyAnimation);
         startTimer();
         mTimerView.start(TIMER_LENGTH);
     }
 
-    private void startAnimation() {
-        dancingMonkey.startAnimation(dancingMonkeyAnimation);
+    private void setMonkeyImage() {
+        if (level == 2) {
+            dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey2));
+        }
+        else if (level == 3) {
+            dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey3));
+        }
+        else if (level == 4) {
+            dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey4));
+        }
     }
 
     private void startTimer() {
@@ -92,19 +99,42 @@ public class ClickerActivity extends AppCompatActivity {
     }
 
     private void onMonkeyClicked() {
-        monkeyClicks++;
-        clickCounterTV.setText("Monkey Clicks: " + monkeyClicks);
+        if (monkeyClicks < 10 * level) {
+            monkeyClicks++;
+            clickCounterTV.setText("Monkey Clicks: " + monkeyClicks);
+            if (monkeyClicks == 10 * level) {
+                clickCounterTV.setTextColor(getResources().getColor(R.color.colorPrimary));
+                onWin();
+            }
+        }
+
     }
 
     private void onTimeOut() {
         dancingMonkeyAnimation.cancel();
         mTimerView.stop();
         dancingMonkey.setOnClickListener(null);
-        if (monkeyClicks < (10*level)) {
-            onLose();
-        }
-        else {
-            onWin();
+        onLose();
+    }
+
+    private void onWin() {
+        beatRoundEffect.start();
+        level++;
+        mTimer.cancel();
+        mTimerView.stop();
+        showSplashScreen();
+    }
+
+    private void showSplashScreen() {
+        Intent intent = new Intent(this, SplashScreenActivity.class);
+        startActivityForResult(intent, SPLASH_SCREEN_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SPLASH_SCREEN_REQUEST) {
+            startRound();
         }
     }
 
@@ -132,21 +162,6 @@ public class ClickerActivity extends AppCompatActivity {
     private void restart() {
         level = 1;
         dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey));
-        startRound();
-    }
-
-    private void onWin() {
-        beatRoundEffect.start();
-        level++;
-        if (level == 2) {
-            dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey2));
-        }
-        else if (level == 3) {
-            dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey3));
-        }
-        else if (level == 4) {
-            dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey4));
-        }
         startRound();
     }
 
