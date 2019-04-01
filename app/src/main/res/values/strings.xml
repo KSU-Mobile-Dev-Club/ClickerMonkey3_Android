@@ -5,4 +5,7 @@
     <string name="view_scoreboard">View Scoreboard</string>
     <string name="view_attributions">Attributions</string>
     <string name="click_goal_achieved">Click Goal Achieved!</string>
+    <string name="monkey_clicks">Monkey Clicks: %1$s</string>
+    <string name="click_goal">Click Goal: %1$s</string>
+    <string name="level">Level: %1$s</string>
 </resources>

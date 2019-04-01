@@ -57,10 +57,10 @@ public class ClickerActivity extends AppCompatActivity {
 
     private void startRound() {
         setMonkeyImage();
-        clickGoalTV.setText("Click Goal: " + level * 10);
-        levelTV.setText("Level " + level);
+        clickGoalTV.setText(getApplicationContext().getString(R.string.click_goal, Integer.toString(level * 10)));
+        levelTV.setText(getApplicationContext().getString(R.string.level, Integer.toString(level)));
         monkeyClicks = 0;
-        clickCounterTV.setText("Monkey Clicks: " + monkeyClicks);
+        clickCounterTV.setText(getApplicationContext().getString(R.string.monkey_clicks, Integer.toString(monkeyClicks)));
         clickCounterTV.setTextColor(getResources().getColor(R.color.colorAccent));
         dancingMonkey.startAnimation(dancingMonkeyAnimation);
         dancingMonkey.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +100,8 @@ public class ClickerActivity extends AppCompatActivity {
     private void onMonkeyClicked() {
         if (monkeyClicks < 10 * level) {
             monkeyClicks++;
-            clickCounterTV.setText("Monkey Clicks: " + monkeyClicks);
+            clickCounterTV.setText(
+                    getApplicationContext().getString(R.string.monkey_clicks, Integer.toString(monkeyClicks)));
             if (monkeyClicks == 10 * level) {
                 level++;
                 clickCounterTV.setTextColor(getResources().getColor(R.color.colorPrimary));
