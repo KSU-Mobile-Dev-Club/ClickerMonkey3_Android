@@ -4,4 +4,5 @@
     <string name="play_game">Play Game</string>
     <string name="view_scoreboard">View Scoreboard</string>
     <string name="view_attributions">Attributions</string>
+    <string name="click_goal_achieved">Click Goal Achieved!</string>
 </resources>

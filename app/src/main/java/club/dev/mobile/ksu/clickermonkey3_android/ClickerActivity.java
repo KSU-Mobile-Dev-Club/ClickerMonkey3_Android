@@ -45,13 +45,6 @@ public class ClickerActivity extends AppCompatActivity {
         lostEffect = MediaPlayer.create(this, R.raw.sample3);
 
         startRound();
-
-        dancingMonkey.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onMonkeyClicked();
-            }
-        });
     }
 
     @Override
@@ -70,6 +63,12 @@ public class ClickerActivity extends AppCompatActivity {
         clickCounterTV.setText("Monkey Clicks: " + monkeyClicks);
         clickCounterTV.setTextColor(getResources().getColor(R.color.colorAccent));
         dancingMonkey.startAnimation(dancingMonkeyAnimation);
+        dancingMonkey.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onMonkeyClicked();
+            }
+        });
         startTimer();
         mTimerView.start(TIMER_LENGTH);
     }
@@ -103,6 +102,7 @@ public class ClickerActivity extends AppCompatActivity {
             monkeyClicks++;
             clickCounterTV.setText("Monkey Clicks: " + monkeyClicks);
             if (monkeyClicks == 10 * level) {
+                level++;
                 clickCounterTV.setTextColor(getResources().getColor(R.color.colorPrimary));
                 onWin();
             }
@@ -119,7 +119,6 @@ public class ClickerActivity extends AppCompatActivity {
 
     private void onWin() {
         beatRoundEffect.start();
-        level++;
         mTimer.cancel();
         mTimerView.stop();
         showSplashScreen();
