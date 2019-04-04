@@ -4,18 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <TextView
-        android:id="@+id/countdown_timer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="20dp"
-        android:textSize="16dp"
-        android:textStyle="bold" />
+    tools:context=".ClickerActivity">
 
     <TextView
         android:id="@+id/level"
@@ -23,9 +12,11 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/countdown_timer"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="20dp"
-        android:textSize="16dp" />
+        android:textSize="40dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/click_goal"
@@ -35,7 +26,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/level"
         android:layout_marginTop="20dp"
-        android:textSize="16dp" />
+        android:textSize="30dp"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/click_counter"
@@ -45,8 +38,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/click_goal"
         android:layout_marginTop="20dp"
-        android:textSize="16dp"
-        android:textStyle="bold" />
+        android:textSize="30dp"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"/>
 
     <ImageView
         android:id="@+id/dancing_monkey"
@@ -57,5 +51,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/click_counter"/>
+
+    <club.dev.mobile.ksu.clickermonkey3_android.TimerView
+        android:id="@+id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:circleColor="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>
