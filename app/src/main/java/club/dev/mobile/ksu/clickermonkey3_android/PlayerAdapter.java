@@ -10,8 +10,12 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class PlayerAdapter extends ArrayAdapter<Player> {
+
+    ArrayList<Player> players;
+
     public PlayerAdapter(Context context, ArrayList<Player> players){
         super(context, 0);
+        this.players = players;
     }
 
     public View getView(int position, View childView, ViewGroup parent){
@@ -22,6 +26,9 @@ public class PlayerAdapter extends ArrayAdapter<Player> {
 
         TextView player = (TextView) childView.findViewById(R.id.player);
         TextView score = (TextView) childView.findViewById(R.id.score);
+
+        player.setText(players.get(position).getName());
+        score.setText(players.get(position).getScore());
 
         return childView;
 
