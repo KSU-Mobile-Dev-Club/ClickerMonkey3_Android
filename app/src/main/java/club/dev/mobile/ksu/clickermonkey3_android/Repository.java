@@ -31,10 +31,6 @@ public class Repository {
         mDatabase.child("scores").child(k).removeValue();
     }
 
-    public void Compare()
-    {
-
-    }
 
     public void getChildren()
     {
