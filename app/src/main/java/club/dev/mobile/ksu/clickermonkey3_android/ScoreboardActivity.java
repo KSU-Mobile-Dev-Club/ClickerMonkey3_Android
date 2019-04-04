@@ -3,6 +3,7 @@ package club.dev.mobile.ksu.clickermonkey3_android;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -13,11 +14,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import club.dev.mobile.ksu.clickermonkey3_android.Repository;
-
 public class ScoreboardActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
-    final List<Player> dataList = new ArrayList<Player>();
+    final List<Player> dataList = new ArrayList<>();
+    PlayerAdapter adapter;
     int userScore = 5;
     String userName = "Test3";
     String userKey = "PlaceTest";
@@ -27,11 +27,14 @@ public class ScoreboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scoreboard);
+        ListView scoreBoardRankingListView = findViewById(R.id.scoreListView);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         getChildren();
 
-        }
+        adapter = new PlayerAdapter(this, new ArrayList<>(dataList));
+        scoreBoardRankingListView.setAdapter(adapter);
+    }
 
     public void Add(String s, int i, String k)
     {
