@@ -7,7 +7,8 @@ public class Player {
     int score;
     String key;
 
-    public Player() {}
+    public Player() {
+    }
 
     public String getName() {
         return name;
@@ -34,43 +35,11 @@ public class Player {
         this.key = key;
     }
 
-    public Player(String s, int i, String k)
-    {
+    public Player(String s, int i, String k) {
         name = s;
         score = i;
         key = k;
     }
-public Player() {}
-    int score;
-    String name;
-    int firebaseKey;
-
-    public Player(int score, String name) {
-        this.score = score;
-        this.name = name;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getFirebaseKey() {
-        return firebaseKey;
-    }
-
-    public void setFirebaseKey(int firebaseKey) {
-        this.firebaseKey = firebaseKey;
-    }
 }
+
+
