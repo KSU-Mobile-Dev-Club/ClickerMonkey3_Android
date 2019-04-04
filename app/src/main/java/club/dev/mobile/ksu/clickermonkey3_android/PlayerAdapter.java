@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class PlayerAdapter extends ArrayAdapter<Player> {
     public PlayerAdapter(Context context, ArrayList<Player> players){
         super(context, 0);
-
     }
 
     public View getView(int position, View childView, ViewGroup parent){
