@@ -1,9 +1,6 @@
 package club.dev.mobile.ksu.clickermonkey3_android;
 
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -14,26 +11,12 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScoreboardActivity extends AppCompatActivity {
+public class Repository {
     private DatabaseReference mDatabase;
-    final List<Player> dataList = new ArrayList<>();
-    PlayerAdapter adapter;
-    int userScore = 5;
-    String userName = "Test3";
-    String userKey = "PlaceTest";
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scoreboard);
-        ListView scoreBoardRankingListView = findViewById(R.id.scoreListView);
-
+    final List<Player> dataList = new ArrayList<Player>();
+    public Repository()
+    {
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        getChildren();
-
-        adapter = new PlayerAdapter(this, new ArrayList<>(dataList));
-        scoreBoardRankingListView.setAdapter(adapter);
     }
 
     public void Add(String s, int i, String k)
@@ -57,21 +40,9 @@ public class ScoreboardActivity extends AppCompatActivity {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren())
                 {
                     Player player = postSnapshot.getValue(Player.class);
-                    player.setKey(postSnapshot.getKey());
                     dataList.add(player);
                 }
                 mDatabase.child("scores").orderByChild("score");
-
-                for(int i = 0; i < dataList.size(); i++)
-                {
-                    if(userScore > dataList.get(i).getScore());
-                    {
-                        Add(userName, userScore, userKey);
-                        Delete(dataList.get(dataList.size() - 1).key);
-                        break;
-                    }
-                }
-
             }
 
             @Override
@@ -79,7 +50,5 @@ public class ScoreboardActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
 }
