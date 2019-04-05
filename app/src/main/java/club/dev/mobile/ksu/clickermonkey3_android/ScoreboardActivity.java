@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,6 +22,7 @@ public class ScoreboardActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     final ArrayList<Player> dataList = new ArrayList<>();
     PlayerAdapter adapter;
+    ProgressBar progressBar;
     int userScore = 5;
     String userName = "Test3";
     String userKey = "PlaceTest";
@@ -31,12 +33,10 @@ public class ScoreboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scoreboard);
 
         ListView scoreBoardRankingListView = findViewById(R.id.scoreListView);
-
+        progressBar = findViewById(R.id.progress_bar);
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
         adapter = new PlayerAdapter(this, new ArrayList<>(dataList));
         scoreBoardRankingListView.setAdapter(adapter);
-
         getScores();
     }
 
@@ -63,6 +63,7 @@ public class ScoreboardActivity extends AppCompatActivity {
                     }
                 }
                 adapter.setPlayers(dataList);
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
