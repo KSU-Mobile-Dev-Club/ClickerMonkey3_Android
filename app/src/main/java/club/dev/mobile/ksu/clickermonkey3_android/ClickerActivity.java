@@ -141,7 +141,7 @@ public class ClickerActivity extends AppCompatActivity {
     private void onLose() {
         lostEffect.start();
         Intent intent = new Intent(this, ScoreboardActivity.class);
-        intent.putExtra(ScoreboardActivity.USER_SCORE, level);
+        intent.putExtra(ScoreboardActivity.USER_SCORE, level - 1);
         startActivity(intent);
     }
 }

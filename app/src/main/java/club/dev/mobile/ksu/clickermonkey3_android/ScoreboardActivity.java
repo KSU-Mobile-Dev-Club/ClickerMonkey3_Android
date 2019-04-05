@@ -80,8 +80,8 @@ public class ScoreboardActivity extends AppCompatActivity {
     }
 
     private void checkIfHighScore() {
-        //if there are 5 or less players on the scoreboard, add this player
-        if (dataList.size() <= 5) {
+        //if there are less than players on the scoreboard, add this player
+        if (dataList.size() < 5) {
             AddCurrentPlayer();
         }
 
@@ -89,7 +89,7 @@ public class ScoreboardActivity extends AppCompatActivity {
         else {
             for(int i = 0; i < dataList.size(); i++)
             {
-                if(userScore > dataList.get(i).getScore());
+                if(userScore > dataList.get(i).getScore())
                 {
                     AddCurrentPlayer();
                     Delete(dataList.get(dataList.size() - 1).key);
