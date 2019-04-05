@@ -1,36 +1,43 @@
 package club.dev.mobile.ksu.clickermonkey3_android;
 
+import com.google.firebase.database.Exclude;
+
 public class Player {
-    int score;
-    String name;
-    int firebaseKey;
+        String name;
+        int score;
+        String key;
 
-    public Player(int score, String name) {
-        this.score = score;
-        this.name = name;
-    }
+        public Player() {
+        }
 
-    public int getScore() {
-        return score;
-    }
+        public String getName() {
+            return name;
+        }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
+        public void setName(String name) {
+            this.name = name;
+        }
 
-    public String getName() {
-        return name;
-    }
+        public int getScore() {
+            return score;
+        }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+        public void setScore(int score) {
+            this.score = score;
+        }
 
-    public int getFirebaseKey() {
-        return firebaseKey;
-    }
+        @Exclude
+        public String getKey() {
+            return key;
+        }
 
-    public void setFirebaseKey(int firebaseKey) {
-        this.firebaseKey = firebaseKey;
-    }
+        public void setKey(String key) {
+            this.key = key;
+        }
+
+        public Player(String s, int i, String k) {
+            name = s;
+            score = i;
+            key = k;
+        }
 }
