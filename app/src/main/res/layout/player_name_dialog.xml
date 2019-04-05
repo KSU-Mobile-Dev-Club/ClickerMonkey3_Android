@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             app:backgroundTint="@color/colorPrimary"
             android:hint="Name"
-            android:maxLength="30"
+            android:maxLength="15"
             android:singleLine="true"/>
 
     </android.support.design.widget.TextInputLayout>

@@ -81,6 +81,31 @@ public class ScoreboardActivity extends AppCompatActivity {
         });
     }
 
+    public void updateScores() {
+        dataList.clear();
+        mDatabase.child("scores").orderByChild("score").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren())
+                {
+                    Player player = postSnapshot.getValue(Player.class);
+                    player.setKey(postSnapshot.getKey());
+                    dataList.add(player);
+                }
+
+                Collections.reverse(dataList);
+
+                adapter.setPlayers(dataList);
+                progressBar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     private void checkIfHighScore() {
         //if there are less than players on the scoreboard, add this player
         if (dataList.size() < 5) {
@@ -116,6 +141,8 @@ public class ScoreboardActivity extends AppCompatActivity {
                         Player user = new Player(playerName, userScore);
                         String key = mDatabase.push().getKey();
                         mDatabase.child("scores").child(key).setValue(user);
+                        progressBar.setVisibility(View.VISIBLE);
+                        updateScores();
                     }
                 })
                 .create();
