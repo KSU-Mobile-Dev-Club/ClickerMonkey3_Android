@@ -41,8 +41,8 @@ public class ClickerActivity extends AppCompatActivity {
         dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey));
         dancingMonkeyAnimation = AnimationUtils.loadAnimation(this, R.anim.dancing_monkey);
         mTimerView = findViewById(R.id.timer);
-        beatRoundEffect = MediaPlayer.create(this, R.raw.loss);
-        lostEffect = MediaPlayer.create(this, R.raw.clickgoal);
+        beatRoundEffect = MediaPlayer.create(this, R.raw.clickgoal);
+        lostEffect = MediaPlayer.create(this, R.raw.loss);
 
         startRound();
     }

@@ -25,8 +25,7 @@ public class StartActivity extends AppCompatActivity {
     }
 
     public void viewAttributions(View view) {
-        //Intent viewAttributionsIntent = new Intent(this, ClickerActivity.class);
-        //startActivity(viewAttributionsIntent);
-        Toast.makeText(this, "Sorry! This activity has not been created yet.", Toast.LENGTH_SHORT).show();
+        Intent viewAttributionsIntent = new Intent(this, AttributesActivity.class);
+        startActivity(viewAttributionsIntent);
     }
 }
