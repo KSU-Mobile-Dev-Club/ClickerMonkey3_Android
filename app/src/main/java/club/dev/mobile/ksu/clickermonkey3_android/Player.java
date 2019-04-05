@@ -35,9 +35,8 @@ public class Player {
             this.key = key;
         }
 
-        public Player(String s, int i, String k) {
+        public Player(String s, int i) {
             name = s;
             score = i;
-            key = k;
         }
 }

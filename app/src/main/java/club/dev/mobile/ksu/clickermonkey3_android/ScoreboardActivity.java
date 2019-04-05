@@ -1,10 +1,15 @@
 package club.dev.mobile.ksu.clickermonkey3_android;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
@@ -15,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 
 public class ScoreboardActivity extends AppCompatActivity {
 
@@ -23,14 +28,16 @@ public class ScoreboardActivity extends AppCompatActivity {
     final ArrayList<Player> dataList = new ArrayList<>();
     PlayerAdapter adapter;
     ProgressBar progressBar;
-    int userScore = 5;
-    String userName = "Test3";
-    String userKey = "PlaceTest";
+    public static String USER_SCORE = "User Score";
+    private int userScore;
+    private String playerName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scoreboard);
+
+        userScore = getIntent().getIntExtra(USER_SCORE, 0);
 
         ListView scoreBoardRankingListView = findViewById(R.id.scoreListView);
         progressBar = findViewById(R.id.progress_bar);
@@ -42,7 +49,7 @@ public class ScoreboardActivity extends AppCompatActivity {
 
     public void getScores()
     {
-        mDatabase.child("scores").addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child("scores").orderByChild("score").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren())
@@ -51,17 +58,16 @@ public class ScoreboardActivity extends AppCompatActivity {
                     player.setKey(postSnapshot.getKey());
                     dataList.add(player);
                 }
-                mDatabase.child("scores").orderByChild("score");
 
-                for(int i = 0; i < dataList.size(); i++)
-                {
-                    if(userScore > dataList.get(i).getScore());
-                    {
-                        Add(userName, userScore, userKey);
-                        Delete(dataList.get(dataList.size() - 1).key);
-                        break;
-                    }
+                Collections.reverse(dataList);
+
+                //if the user score is greater than 0, then this activity was entered from the
+                //scoreboard activity and we need to see if the current player can add themselves
+                //to the leaderboard (otherwise we are just viewing the scoreboard)
+                if (userScore > 0) {
+                    checkIfHighScore();
                 }
+
                 adapter.setPlayers(dataList);
                 progressBar.setVisibility(View.GONE);
             }
@@ -73,12 +79,47 @@ public class ScoreboardActivity extends AppCompatActivity {
         });
     }
 
-    public void Add(String s, int i, String k)
-    {
-        Player user = new Player(s, i, k);
-        String key = mDatabase.push().getKey();
-        mDatabase.child("scores").child(key).setValue(user);
+    private void checkIfHighScore() {
+        //if there are 5 or less players on the scoreboard, add this player
+        if (dataList.size() <= 5) {
+            AddCurrentPlayer();
+        }
+
+        //otherwise, see if our score beats any of the high scores
+        else {
+            for(int i = 0; i < dataList.size(); i++)
+            {
+                if(userScore > dataList.get(i).getScore());
+                {
+                    AddCurrentPlayer();
+                    Delete(dataList.get(dataList.size() - 1).key);
+                    break;
+                }
+            }
+        }
     }
+
+    public void AddCurrentPlayer()
+    {
+        final View view = LayoutInflater.from(this).inflate(R.layout.player_name_dialog, null);
+        final EditText nameET = view.findViewById(R.id.player_name_edittext);
+
+        final AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(view)
+                .setTitle("High Score! Enter your name:")
+                .setPositiveButton("SUBMIT", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        playerName = nameET.getText().toString();
+                        Player user = new Player(playerName, userScore);
+                        String key = mDatabase.push().getKey();
+                        mDatabase.child("scores").child(key).setValue(user);
+                    }
+                })
+                .create();
+        dialog.show();
+    }
+
 
     public void Delete(String k)
     {

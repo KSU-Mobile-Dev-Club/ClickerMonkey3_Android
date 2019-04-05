@@ -140,32 +140,8 @@ public class ClickerActivity extends AppCompatActivity {
 
     private void onLose() {
         lostEffect.start();
-        checkHighScore();
-        new AlertDialog.Builder(this)
-                .setTitle("You lose!")
-                .setMessage("Too bad...Do you want to play again?")
-                .setPositiveButton("Heck yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        restart();
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        onBackPressed();
-                    }
-                })
-                .show();
-    }
-
-    private void restart() {
-        level = 1;
-        dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey));
-        startRound();
-    }
-
-    private void checkHighScore() {
-        //TODO: check to see if they get to go on the scoreboard
+        Intent intent = new Intent(this, ScoreboardActivity.class);
+        intent.putExtra(ScoreboardActivity.USER_SCORE, level);
+        startActivity(intent);
     }
 }

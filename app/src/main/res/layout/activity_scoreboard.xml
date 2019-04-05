@@ -20,7 +20,7 @@
         android:id="@+id/scoreBoardTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Scoreboard"
+        android:text="Leaderboard"
         android:textAlignment="center"
         android:textSize="50sp"
         android:textStyle="bold"
