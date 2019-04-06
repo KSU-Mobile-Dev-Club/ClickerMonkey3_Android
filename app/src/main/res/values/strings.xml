@@ -1,11 +1,28 @@
 <resources>
+    <!-- Commonly used strings -->
     <string name="app_name">Clicker Monkey 3</string>
     <string name="title_activity_start">Home</string>
     <string name="play_game">Play Game</string>
     <string name="view_scoreboard">View Scoreboard</string>
-    <string name="view_attributions">Attributions</string>
+    <string name="attributions">Attributions</string>
+    <string name="main_menu">Main Menu</string>
+    <string name="submit">SUBMIT</string>
+
+    <!-- Strings for the ClickerActivity -->
     <string name="click_goal_achieved">Click Goal Achieved!</string>
     <string name="monkey_clicks">Monkey Clicks: %1$s</string>
     <string name="click_goal">Click Goal: %1$s</string>
     <string name="level">Level: %1$s</string>
+
+    <!-- Strings for the ScoreboardActivity -->
+    <string name="leaderboard">Leaderboard</string>
+    <string name="message_high_score">High Score! Enter your name:</string>
+    <string name="hint_player_name">Name</string>
+    <string name="player">Player</string>
+    <string name="score">Score</string>
+
+    <!-- Strings for Attributions -->
+    <string name="attribution_monkey_picture">Monkey Picture: Fusion Books</string>
+    <string name="attribution_monkey_accessories">Monkey Accessories: Adventure Capitalist</string>
+    <string name="attribution_sound_effects">Sounds Effects: Luke Langston</string>
 </resources>

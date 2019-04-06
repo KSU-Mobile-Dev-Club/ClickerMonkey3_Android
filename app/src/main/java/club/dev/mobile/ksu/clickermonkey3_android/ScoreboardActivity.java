@@ -133,8 +133,8 @@ public class ScoreboardActivity extends AppCompatActivity {
 
         final AlertDialog dialog = new AlertDialog.Builder(this)
                 .setView(view)
-                .setTitle("High Score! Enter your name:")
-                .setPositiveButton("SUBMIT", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.message_high_score)
+                .setPositiveButton(R.string.submit, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         playerName = nameET.getText().toString();
