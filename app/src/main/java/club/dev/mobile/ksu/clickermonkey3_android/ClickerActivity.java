@@ -83,6 +83,21 @@ public class ClickerActivity extends AppCompatActivity {
         else if (level == 4) {
             dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey4));
         }
+        else if (level == 5) {
+            dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey5));
+        }
+        else if (level == 6) {
+            dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey6));
+        }
+        else if (level == 7) {
+            dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey7));
+        }
+        else if (level == 8) {
+            dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey8));
+        }
+        else if (level == 9) {
+            dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey9));
+        }
     }
 
     private void startTimer() {
