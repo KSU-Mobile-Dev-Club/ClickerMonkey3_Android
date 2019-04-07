@@ -56,7 +56,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ScoreboardButton"
         android:onClick="viewAttributions"
-        android:text="@string/view_attributions"/>
+        android:text="@string/attributions"/>
 
     <ImageView
         android:id="@+id/imageView"

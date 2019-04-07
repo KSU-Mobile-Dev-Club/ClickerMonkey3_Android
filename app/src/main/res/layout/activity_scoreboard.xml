@@ -20,7 +20,7 @@
         android:id="@+id/scoreBoardTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Leaderboard"
+        android:text="@string/leaderboard"
         android:textAlignment="center"
         android:textSize="50sp"
         android:textStyle="bold"
@@ -51,5 +51,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="10dp"
         android:onClick="backButtonClicked"
-        android:text="Main Menu"/>
+        android:text="@string/main_menu"/>
 </android.support.constraint.ConstraintLayout>
