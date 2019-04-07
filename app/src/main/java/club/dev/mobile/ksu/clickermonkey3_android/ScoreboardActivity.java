@@ -107,7 +107,7 @@ public class ScoreboardActivity extends AppCompatActivity {
 
     private void checkIfHighScore() {
         //if there are less than players on the scoreboard, add this player
-        if (dataList.size() < 5) {
+        if (dataList.size() < 10) {
             AddCurrentPlayer();
         }
 

@@ -40,7 +40,7 @@ public class ClickerActivity extends AppCompatActivity {
         dancingMonkeyAnimation = AnimationUtils.loadAnimation(this, R.anim.dancing_monkey);
         mTimerView = findViewById(R.id.timer);
         beatRoundEffect = MediaPlayer.create(this, R.raw.clickgoal);
-        lostEffect = MediaPlayer.create(this, R.raw.loss);
+        lostEffect = MediaPlayer.create(this, R.raw.goodjob);
 
         startRound();
     }
@@ -80,6 +80,21 @@ public class ClickerActivity extends AppCompatActivity {
         }
         else if (level == 4) {
             dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey4));
+        }
+        else if (level == 5) {
+            dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey5));
+        }
+        else if (level == 6) {
+            dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey6));
+        }
+        else if (level == 7) {
+            dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey7));
+        }
+        else if (level == 8) {
+            dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey8));
+        }
+        else if (level == 9) {
+            dancingMonkey.setImageDrawable(getResources().getDrawable(R.drawable.monkey9));
         }
     }
 
