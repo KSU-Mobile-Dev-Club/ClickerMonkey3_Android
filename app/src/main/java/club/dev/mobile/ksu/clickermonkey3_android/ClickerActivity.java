@@ -4,10 +4,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.ActionMode;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -52,6 +54,7 @@ public class ClickerActivity extends AppCompatActivity {
         super.onPause();
         if (mTimer != null) {
             mTimer.cancel();
+            mTimerView.stop();
         }
     }
 
@@ -158,5 +161,12 @@ public class ClickerActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ScoreboardActivity.class);
         intent.putExtra(ScoreboardActivity.USER_SCORE, level - 1);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mTimer.cancel();
+        mTimerView.stop();
     }
 }
